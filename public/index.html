@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div id="messages"></div>
+	<form id="message-form">
+		<input id="message-input" type="text" />
+		<button type="submit">Send</button>
+	</form>
+	<script>
+		const socket = new WebSocket(`ws://${window.location.host}/ws`);
+
+		const messageForm = document.getElementById('message-form');
+		const messageInput = document.getElementById('message-input');
+		const messagesDiv = document.getElementById('messages');
+
+		// When the connection is open, send some data to the server
+		socket.addEventListener('open', (event) => {
+			console.log('WebSocket connected');
+		});
+
+		socket.addEventListener('message', (event) => {
+			const message = JSON.parse(event.data);
+			const messageElement = document.createElement('div');
+			messageElement.textContent = `${message.username}: ${message.message}`;
+			messagesDiv.appendChild(messageElement);
+		});
+
+		messageForm.addEventListener('submit', (event) => {
+		
