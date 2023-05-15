@@ -3,13 +3,14 @@ package server
 import (
 	"log"
 	"net/http"
+	"time"
 
-	"nhooyr.io/websocket"
-	"nhooyr.io/websocket/wsjson"
+	"github.com/nhooyr/websocket"
+	"github.com/nhooyr/websocket/wsjson"
 )
 
 var clients = make(map[websocket.Conn]bool) // connected clients
-var broadcast = make(chan Message)          // broadcast channel
+var broadcast = make(chan Message)           // broadcast channel
 
 // Message struct
 type Message struct {
