@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/nhooyr/websocket"
-	"github.com/nhooyr/websocket/wsjson"
+	"nhooyr.io/websocket"
+	"nhooyr.io/websocket/wsjson"
 )
 
 var clients = make(map[websocket.Conn]bool) // connected clients
